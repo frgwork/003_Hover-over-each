@@ -1,0 +1,100 @@
+@keyframes shake {
+  25% {
+    transform: rotate(calc(var(--angle) * -1));
+  }
+
+  50% {
+    transform: rotate(var(--angle));
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+body {
+  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  padding: 0 5rem;
+}
+
+h1 {
+  font-weight: 700;
+}
+.container {
+  width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.display {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 0.1em;
+}
+
+.display__hover {
+  --width: 100%;
+  --time: 0.7s;
+
+  position: relative;
+  display: inline-block;
+  height: 1em;
+  padding: 1em;
+
+  color: white;
+  background: #222;
+  overflow: hidden;
+}
+
+.display__hover text {
+  position: relative;
+  z-index: 5;
+
+  transition: color var(--time);
+}
+
+.display__hover:hover text {
+  color: #222;
+}
+
+.display__hover span {
+  position: absolute;
+  display: block;
+  content: '';
+  z-index: 0;
+  width: 0;
+  height: 0;
+
+  border-radius: 100%;
+  background: #fff;
+
+  transform: translate(-50%, -50%);
+  transition: width var(--time), padding-top var(--time);
+}
+
+.display__hover:hover span {
+  width: calc(var(--width) * 2.25);
+  padding-top: calc(var(--width) * 2.25);
+}
+
+.display__hover.flash:hover text {
+  color: white;
+}
+
+.display__hover.flash span {
+  background: #ff3b3b;
+}
+
+.animated {
+  --angle: 5deg;
+  animation: shake 0.3s;
+}
+
+.link {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  font-size: 1rem;
+}
